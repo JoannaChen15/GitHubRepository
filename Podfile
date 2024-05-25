@@ -6,5 +6,6 @@ target 'GitHubRepository' do
   use_frameworks!
 
   # Pods for GitHubRepository
+  pod 'SnapKit'
 
 end
