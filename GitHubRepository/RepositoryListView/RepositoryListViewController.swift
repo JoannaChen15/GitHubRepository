@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class RepositoryListViewController: UIViewController {
     
@@ -13,6 +14,8 @@ class RepositoryListViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
     }
+    
+    private let searchBar = UISearchBar()
 }
 
 // MARK: - private functions
@@ -21,6 +24,7 @@ private extension RepositoryListViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
         configureNavigationBar()
+        configureSearchBar()
     }
     
     func configureNavigationBar() {
@@ -44,4 +48,13 @@ private extension RepositoryListViewController {
         navigationItem.title = "Repository Search"
     }
     
+    func configureSearchBar() {
+        view.addSubview(searchBar)
+        searchBar.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        searchBar.placeholder = "請輸入關鍵字搜尋"
+    }
 }
