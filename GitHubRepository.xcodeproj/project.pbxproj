@@ -18,6 +18,7 @@
 		9EF8312D2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8312C2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift */; };
 		9EF8312F2C0308AF00A4F5D1 /* ReposityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8312E2C0308AF00A4F5D1 /* ReposityListTableViewCell.swift */; };
 		9EF831312C032BE000A4F5D1 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF831302C032BE000A4F5D1 /* RepositoryDetailViewController.swift */; };
+		9EF831332C03516200A4F5D1 /* RepositoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF831322C03516200A4F5D1 /* RepositoryDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		9EF8312C2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryResponse.swift; sourceTree = "<group>"; };
 		9EF8312E2C0308AF00A4F5D1 /* ReposityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposityListTableViewCell.swift; sourceTree = "<group>"; };
 		9EF831302C032BE000A4F5D1 /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
+		9EF831322C03516200A4F5D1 /* RepositoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewModel.swift; sourceTree = "<group>"; };
 		BBE201B45CE9877A2B3549E0 /* Pods-GitHubRepository.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubRepository.release.xcconfig"; path = "Target Support Files/Pods-GitHubRepository/Pods-GitHubRepository.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF831302C032BE000A4F5D1 /* RepositoryDetailViewController.swift */,
+				9EF831322C03516200A4F5D1 /* RepositoryDetailViewModel.swift */,
 			);
 			path = RepositoryDetailView;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				9E338BF92C01F79300553747 /* AppDelegate.swift in Sources */,
 				9EF8312D2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift in Sources */,
 				9E338BFB2C01F79300553747 /* SceneDelegate.swift in Sources */,
+				9EF831332C03516200A4F5D1 /* RepositoryDetailViewModel.swift in Sources */,
 				9EF831292C022BF200A4F5D1 /* RepositoryListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
