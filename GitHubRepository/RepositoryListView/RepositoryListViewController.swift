@@ -83,24 +83,36 @@ private extension RepositoryListViewController {
     }
     
     func configureNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowColor = .clear
-
-        // 設定大標題文字屬性
-        appearance.largeTitleTextAttributes = [
+        
+        // 設置導航欄的標準外觀
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+        standardAppearance.shadowColor = .clear
+        standardAppearance.backgroundColor = .black.withAlphaComponent(0.8)
+        
+        standardAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.black,
             .font: UIFont.boldSystemFont(ofSize: 34)
         ]
         
+        // 設置導航欄的滾動外觀
+        let scrollEdgeAppearance = UINavigationBarAppearance()
+        scrollEdgeAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.boldSystemFont(ofSize: 17)
+        ]
+        scrollEdgeAppearance.backgroundColor = .systemBackground
+        scrollEdgeAppearance.shadowColor = .clear
+        
         // 配置導航欄的標準外觀
-        navigationController?.navigationBar.standardAppearance = appearance
-
+        navigationController?.navigationBar.standardAppearance = standardAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+        
         // 啟用大標題
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // 標題文字
-        navigationItem.title = "Repository Search"
+        title = "Repository Search"
     }
     
     func configureSearchBar() {
