@@ -13,6 +13,7 @@ class RepositoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        
         // 添加點擊手勢
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -25,15 +26,35 @@ class RepositoryListViewController: UIViewController {
     // MARK: - private properties
     private let viewModel = RepositoryListViewModel()
     private let searchBar = UISearchBar()
+    private let tableView = UITableView()
+
+}
+
+extension RepositoryListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchTerm = searchBar.text ?? ""
+        viewModel.searchRepositories(byName: searchTerm)
+        searchBar.resignFirstResponder()
+    }
+}
+extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.repositories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReposityListTableViewCell", for: indexPath) as! ReposityListTableViewCell
+        return cell
+    }
 }
 
 // MARK: - private functions
 private extension RepositoryListViewController {
-    
     func configureUI() {
         view.backgroundColor = .systemBackground
         configureNavigationBar()
         configureSearchBar()
+        configureTableView()
     }
     
     func configureNavigationBar() {
@@ -61,18 +82,20 @@ private extension RepositoryListViewController {
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalToSuperview()
-            $0.centerX.equalToSuperview()
+            $0.width.centerX.equalToSuperview()
         }
         searchBar.placeholder = "請輸入關鍵字搜尋"
         searchBar.delegate = self
     }
-}
-
-extension RepositoryListViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchTerm = searchBar.text ?? ""
-        viewModel.searchRepositories(byName: searchTerm)
-        searchBar.resignFirstResponder()
+    
+    func configureTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom)
+            $0.width.centerX.bottom.equalToSuperview()
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ReposityListTableViewCell.self, forCellReuseIdentifier: "ReposityListTableViewCell")
     }
 }
