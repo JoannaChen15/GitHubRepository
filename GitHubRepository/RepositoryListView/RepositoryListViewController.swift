@@ -22,6 +22,8 @@ class RepositoryListViewController: UIViewController {
         view.endEditing(true) // 收起所有正在編輯的元素的鍵盤
     }
     
+    // MARK: - private properties
+    private let viewModel = RepositoryListViewModel()
     private let searchBar = UISearchBar()
 }
 
@@ -63,5 +65,14 @@ private extension RepositoryListViewController {
             $0.centerX.equalToSuperview()
         }
         searchBar.placeholder = "請輸入關鍵字搜尋"
+        searchBar.delegate = self
+    }
+}
+
+extension RepositoryListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchTerm = searchBar.text ?? ""
+        viewModel.searchRepositories(byName: searchTerm)
+        searchBar.resignFirstResponder()
     }
 }
