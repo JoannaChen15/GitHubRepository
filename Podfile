@@ -8,5 +8,6 @@ target 'GitHubRepository' do
   # Pods for GitHubRepository
   pod 'SnapKit'
   pod 'Alamofire', '~> 5.7.1'
+  pod 'Kingfisher'
   
 end
