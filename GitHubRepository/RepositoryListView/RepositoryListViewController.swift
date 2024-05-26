@@ -17,6 +17,8 @@ class RepositoryListViewController: UIViewController {
         // 添加點擊手勢
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+        
+        viewModel.delegate = self
     }
     
     @objc func hideKeyboard() {
@@ -37,6 +39,13 @@ extension RepositoryListViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 }
+
+extension RepositoryListViewController: RepositoryListViewModelDelegate {
+    func reloadData() {
+        tableView.reloadData()
+    }
+}
+
 extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.repositories.count
