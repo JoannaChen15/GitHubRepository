@@ -6,9 +6,20 @@
 //
 
 import Foundation
+
+protocol RepositoryListViewModelDelegate: AnyObject {
+    func reloadData()
+}
+
 class RepositoryListViewModel {
     
-    var repositories = [Item]()
+    weak var delegate: RepositoryListViewModelDelegate?
+    
+    private(set) var repositories = [Item]() {
+        didSet {
+            delegate?.reloadData()
+        }
+    }
 
     func searchRepositories(byName repositoryName: String) {
         // 抓取Repository資料
