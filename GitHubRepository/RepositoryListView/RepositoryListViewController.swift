@@ -38,6 +38,12 @@ extension RepositoryListViewController: UISearchBarDelegate {
         viewModel.searchRepositories(byName: searchTerm)
         searchBar.resignFirstResponder()
     }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            viewModel.resetRepositories()
+        }
+    }
 }
 
 extension RepositoryListViewController: RepositoryListViewModelDelegate {

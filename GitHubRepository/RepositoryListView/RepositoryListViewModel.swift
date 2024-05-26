@@ -34,6 +34,10 @@ class RepositoryListViewModel {
         }
     }
     
+    func resetRepositories() {
+        repositories = []
+    }
+    
     private let networkManager = NetworkManager()
 
 }
