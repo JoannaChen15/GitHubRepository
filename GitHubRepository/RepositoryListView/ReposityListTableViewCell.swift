@@ -1,5 +1,5 @@
 //
-//  ReposityListTableViewCell.swift
+//  RepositoryListTableViewCell.swift
 //  GitHubRepository
 //
 //  Created by joanna on 2024/5/26.
@@ -8,10 +8,10 @@
 import UIKit
 import Kingfisher
 
-class ReposityListTableViewCell: UITableViewCell {
+class RepositoryListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: "ReposityListTableViewCell")
+        super.init(style: .default, reuseIdentifier: "RepositoryListTableViewCell")
         configureUI()
     }
     
@@ -41,7 +41,7 @@ class ReposityListTableViewCell: UITableViewCell {
 
 
 // MARK: - private functions
-private extension ReposityListTableViewCell {
+private extension RepositoryListTableViewCell {
     func configureUI() {
         configureOuterStackView()
         configureOwnerIcon()

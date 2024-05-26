@@ -58,7 +58,7 @@ extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReposityListTableViewCell", for: indexPath) as! ReposityListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryListTableViewCell", for: indexPath) as! RepositoryListTableViewCell
         cell.setupWith(viewModel: viewModel.repositories[indexPath.row])
         return cell
     }
@@ -121,6 +121,6 @@ private extension RepositoryListViewController {
         }
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ReposityListTableViewCell.self, forCellReuseIdentifier: "ReposityListTableViewCell")
+        tableView.register(RepositoryListTableViewCell.self, forCellReuseIdentifier: "RepositoryListTableViewCell")
     }
 }
