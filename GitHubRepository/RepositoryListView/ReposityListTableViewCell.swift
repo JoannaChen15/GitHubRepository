@@ -26,8 +26,8 @@ class ReposityListTableViewCell: UITableViewCell {
     
     func setupWith(viewModel: Item) {
         ownerIconImageView.kf.setImage(with: viewModel.owner.avatarURL)
-        repositoryNameLabel.text = "\(viewModel.fullName)"
-        descriptionLabel.text = "\(viewModel.description ?? "無資料")" 
+        repositoryNameLabel.text = viewModel.fullName
+        descriptionLabel.text = viewModel.description ?? "unknown"
     }
     
     // MARK: - private properties

@@ -14,6 +14,18 @@ class RepositoryDetailViewController: UIViewController {
         configureUI()
     }
     
+    func setupWith(viewModel: RepositoryDetailViewModel) {
+        self.viewModel = viewModel
+        let repositoryModel = viewModel.repositoryModel
+        ownerIconImageView.kf.setImage(with: repositoryModel.owner.avatarURL)
+        repositoryNameLabel.text = repositoryModel.fullName
+        programLanguageLabel.text = "Written in \(repositoryModel.language ?? "unknown")"
+        starsLabel.text = "\(repositoryModel.stargazersCount) stars"
+        watchersLabel.text = "\(repositoryModel.watchersCount) watchers"
+        forksLabel.text = "\(repositoryModel.forksCount) forks"
+        issuesLabel.text = "\(repositoryModel.openIssuesCount) open issues"
+    }
+    
     // MARK: - private properties
     private let outerStackView = UIStackView()
     private let middleStackView = UIStackView()
@@ -25,6 +37,7 @@ class RepositoryDetailViewController: UIViewController {
     private let watchersLabel = UILabel()
     private let forksLabel = UILabel()
     private let issuesLabel = UILabel()
+    private var viewModel: RepositoryDetailViewModel?
     
 }
 
@@ -60,6 +73,12 @@ private extension RepositoryDetailViewController {
         // 設定返回按鈕文字、顏色
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .black
+
+        // 標題文字
+        let originalString = viewModel?.repositoryModel.fullName ?? ""
+        let components = originalString.components(separatedBy: "/")
+        let resultString = components.first ?? originalString
+        navigationItem.title = resultString
     }
     
     func configureOuterStackView() {

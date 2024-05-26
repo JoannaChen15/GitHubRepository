@@ -62,6 +62,15 @@ extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSour
         cell.setupWith(viewModel: viewModel.repositories[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repositoryDetailViewController = RepositoryDetailViewController()
+        let detailViewModel = RepositoryDetailViewModel(
+            repositoryModel: viewModel.repositories[indexPath.row]
+        )
+        repositoryDetailViewController.setupWith(viewModel: detailViewModel)
+        navigationController?.pushViewController(repositoryDetailViewController, animated: true)
+    }
 }
 
 // MARK: - private functions
