@@ -104,11 +104,8 @@ private extension RepositoryListViewController {
     }
     
     func configureSearchBar() {
-        view.addSubview(searchBar)
-        searchBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.width.centerX.equalToSuperview()
-        }
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
+        tableView.tableHeaderView = searchBar
         searchBar.placeholder = "請輸入關鍵字搜尋"
         searchBar.delegate = self
     }
@@ -116,7 +113,7 @@ private extension RepositoryListViewController {
     func configureTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.width.centerX.bottom.equalToSuperview()
         }
         tableView.delegate = self
