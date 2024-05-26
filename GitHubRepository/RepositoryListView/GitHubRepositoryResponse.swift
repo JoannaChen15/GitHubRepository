@@ -41,7 +41,7 @@ struct Item: Codable {
 
 // MARK: - Owner
 struct Owner: Codable {
-    let avatarURL: String
+    let avatarURL: URL
 
     enum CodingKeys: String, CodingKey {
         case avatarURL = "avatar_url"

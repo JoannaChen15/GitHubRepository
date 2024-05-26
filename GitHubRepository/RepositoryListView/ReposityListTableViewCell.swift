@@ -6,21 +6,28 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ReposityListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "ReposityListTableViewCell")
         configureUI()
-        
-        //test
-        ownerIconImageView.backgroundColor = .blue
-        repositoryNameLabel.text = "openstack/swift"
-        descriptionLabel.text = "OpenStack Storage (Swift). Mirror of code maintained at opendev.org."
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        ownerIconImageView.layer.cornerRadius = ownerIconImageView.bounds.width / 2
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupWith(viewModel: Item) {
+        ownerIconImageView.kf.setImage(with: viewModel.owner.avatarURL)
+        repositoryNameLabel.text = "\(viewModel.fullName)"
+        descriptionLabel.text = "\(viewModel.description ?? "無資料")" 
     }
     
     // MARK: - private properties
@@ -59,6 +66,7 @@ private extension ReposityListTableViewCell {
         ownerIconImageView.snp.makeConstraints {
             $0.size.equalTo(80)
         }
+        ownerIconImageView.clipsToBounds = true
     }
     
     func configureInnerStackView() {
@@ -76,7 +84,7 @@ private extension ReposityListTableViewCell {
     
     func configureDescriptionLabel() {
         innerStackView.addArrangedSubview(descriptionLabel)
-        descriptionLabel.font = UIFont.systemFont(ofSize: 15)
-        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.numberOfLines = 3
     }
 }
