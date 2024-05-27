@@ -61,10 +61,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9E338BEC2C01F79300553747 = {
+		9E03BCDE2C04AA5900B52CE5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				9EF8312A2C0241BD00A4F5D1 /* NetworkManager.swift */,
+				9EF8312C2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9E338BEC2C01F79300553747 = {
+			isa = PBXGroup;
+			children = (
 				9E338BF72C01F79300553747 /* GitHubRepository */,
 				9E338BF62C01F79300553747 /* Products */,
 				362764736139FE5815635A25 /* Pods */,
@@ -85,6 +93,7 @@
 			children = (
 				9E338BF82C01F79300553747 /* AppDelegate.swift */,
 				9E338BFA2C01F79300553747 /* SceneDelegate.swift */,
+				9E03BCDE2C04AA5900B52CE5 /* Network */,
 				9EF831272C022BD300A4F5D1 /* RepositoryListView */,
 				9EF831342C03547000A4F5D1 /* RepositoryDetailView */,
 				9E338C012C01F79600553747 /* Assets.xcassets */,
@@ -100,7 +109,6 @@
 				9E5C85AD2C01FF7300F78921 /* RepositoryListViewController.swift */,
 				9EF8312E2C0308AF00A4F5D1 /* ReposityListTableViewCell.swift */,
 				9EF831282C022BF200A4F5D1 /* RepositoryListViewModel.swift */,
-				9EF8312C2C02567D00A4F5D1 /* GitHubRepositoryResponse.swift */,
 			);
 			path = RepositoryListView;
 			sourceTree = "<group>";

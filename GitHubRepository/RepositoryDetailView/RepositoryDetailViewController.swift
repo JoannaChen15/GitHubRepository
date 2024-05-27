@@ -41,6 +41,7 @@ class RepositoryDetailViewController: UIViewController {
     
 }
 
+// MARK: - private functions
 private extension RepositoryDetailViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
