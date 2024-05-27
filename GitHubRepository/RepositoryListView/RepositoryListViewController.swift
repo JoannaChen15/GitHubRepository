@@ -22,6 +22,10 @@ class RepositoryListViewController: UIViewController {
         configureNavigationBar()
         
         viewModel.delegate = self
+        // 取消tableViewCell選取狀態
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     }
     
