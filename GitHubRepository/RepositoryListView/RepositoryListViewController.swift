@@ -17,8 +17,12 @@ class RepositoryListViewController: UIViewController {
         // 添加點擊手勢
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationBar()
         
         viewModel.delegate = self
+    }
     }
     
     @objc func hideKeyboard() {
@@ -77,32 +81,27 @@ extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSour
 private extension RepositoryListViewController {
     func configureUI() {
         view.backgroundColor = .systemBackground
-        configureNavigationBar()
         configureSearchBar()
         configureTableView()
     }
     
     func configureNavigationBar() {
         
+        // 設置導航欄滾動至邊界時的外觀
+        let scrollEdgeAppearance = UINavigationBarAppearance()
+        scrollEdgeAppearance.shadowColor = .clear
+        scrollEdgeAppearance.backgroundColor = .white
+        scrollEdgeAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        
         // 設置導航欄的標準外觀
         let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.configureWithOpaqueBackground()
-        standardAppearance.shadowColor = .clear
-        standardAppearance.backgroundColor = .black.withAlphaComponent(0.8)
-        
-        standardAppearance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.black,
-            .font: UIFont.boldSystemFont(ofSize: 34)
-        ]
-        
-        // 設置導航欄的滾動外觀
-        let scrollEdgeAppearance = UINavigationBarAppearance()
-        scrollEdgeAppearance.titleTextAttributes = [
+        standardAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.boldSystemFont(ofSize: 17)
         ]
-        scrollEdgeAppearance.backgroundColor = .systemBackground
-        scrollEdgeAppearance.shadowColor = .clear
+        standardAppearance.shadowColor = .clear
+        standardAppearance.backgroundColor = .black.withAlphaComponent(0.9)
         
         // 配置導航欄的標準外觀
         navigationController?.navigationBar.standardAppearance = standardAppearance
@@ -125,8 +124,7 @@ private extension RepositoryListViewController {
     func configureTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.width.centerX.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         tableView.delegate = self
         tableView.dataSource = self
