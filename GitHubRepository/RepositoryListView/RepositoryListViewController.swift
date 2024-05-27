@@ -32,6 +32,7 @@ class RepositoryListViewController: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         // 添加點擊手勢
+        guard tapGesture == nil else { return }
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture!)
     }
@@ -40,6 +41,7 @@ class RepositoryListViewController: UIViewController {
         // 移除點擊手勢
         guard let tapGesture else { return }
         view.removeGestureRecognizer(tapGesture)
+        self.tapGesture = nil
     }
     
     @objc func hideKeyboard() {
