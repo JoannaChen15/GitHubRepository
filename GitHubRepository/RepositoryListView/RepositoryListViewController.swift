@@ -13,20 +13,33 @@ class RepositoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        viewModel.delegate = self
         
-        // 添加點擊手勢
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
+        // 訂閱鍵盤彈出和隱藏的通知
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureNavigationBar()
         
-        viewModel.delegate = self
         // 取消tableViewCell選取狀態
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        // 添加點擊手勢
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture!)
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        // 移除點擊手勢
+        guard let tapGesture else { return }
+        view.removeGestureRecognizer(tapGesture)
     }
     
     @objc func hideKeyboard() {
@@ -46,10 +59,18 @@ class RepositoryListViewController: UIViewController {
             searchRepositories()
         }
     }
+    
+    deinit {
+        // 移除通知监听
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     // MARK: - private properties
     private let viewModel = RepositoryListViewModel()
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
+    private var tapGesture: UITapGestureRecognizer?
     private let refreshControl = UIRefreshControl()
 
 }
