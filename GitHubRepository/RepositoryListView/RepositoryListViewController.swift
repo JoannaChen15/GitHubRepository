@@ -136,8 +136,11 @@ private extension RepositoryListViewController {
     }
     
     func configureSearchBar() {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
         tableView.tableHeaderView = searchBar
+        searchBar.snp.makeConstraints {
+            $0.height.equalTo(52)
+            $0.width.equalTo(tableView)
+        }
         searchBar.placeholder = "請輸入關鍵字搜尋"
         searchBar.delegate = self
     }
