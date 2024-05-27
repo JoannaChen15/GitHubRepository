@@ -33,17 +33,31 @@ class RepositoryListViewController: UIViewController {
         view.endEditing(true) // 收起所有正在編輯的元素的鍵盤
     }
     
+    @objc func refreshRepositoryList() {
+        if searchBar.text == "" {
+            let controller = UIAlertController(title: "Oops!", message: "The data couldn't be read because it is missing.", preferredStyle: .alert)
+            let continueAction = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+                guard let self else { return }
+                self.tableView.refreshControl?.endRefreshing()
+            }
+            controller.addAction(continueAction)
+            present(controller, animated: true)
+        } else {
+            searchRepositories()
+        }
+    }
     // MARK: - private properties
     private let viewModel = RepositoryListViewModel()
     private let searchBar = UISearchBar()
     private let tableView = UITableView()
+    private let refreshControl = UIRefreshControl()
 
 }
 
+// MARK: - UISearchBarDelegate
 extension RepositoryListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchTerm = searchBar.text ?? ""
-        viewModel.searchRepositories(byName: searchTerm)
+        searchRepositories()
         searchBar.resignFirstResponder()
     }
 
@@ -54,12 +68,15 @@ extension RepositoryListViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - RepositoryListViewModelDelegate
 extension RepositoryListViewController: RepositoryListViewModelDelegate {
-    func reloadData() {
+    func didUpdateRepositories() {
+        tableView.refreshControl?.endRefreshing()
         tableView.reloadData()
     }
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension RepositoryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.repositories.count
@@ -133,5 +150,12 @@ private extension RepositoryListViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RepositoryListTableViewCell.self, forCellReuseIdentifier: "RepositoryListTableViewCell")
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshRepositoryList), for: .valueChanged)
+    }
+    
+    func searchRepositories() {
+        let searchTerm = searchBar.text ?? ""
+        viewModel.searchRepositories(byName: searchTerm)
     }
 }

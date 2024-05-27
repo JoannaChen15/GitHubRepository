@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RepositoryListViewModelDelegate: AnyObject {
-    func reloadData()
+    func didUpdateRepositories()
 }
 
 class RepositoryListViewModel {
@@ -17,7 +17,7 @@ class RepositoryListViewModel {
     
     private(set) var repositories = [Item]() {
         didSet {
-            delegate?.reloadData()
+            delegate?.didUpdateRepositories()
         }
     }
 
